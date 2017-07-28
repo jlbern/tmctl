@@ -17,7 +17,7 @@
 TMATE=`which tmate`
 SSH=`which ssh`
 TMTMSTR=`hostname`
-TMTSLV="162.243.173.56"
+TMTSLV="<SOME-IP-ADDR>"
 
 #
 #Functions
@@ -49,11 +49,11 @@ NOTIFY(){
 	# Feed $CONNSTR with the SSH connection string value
 	CONNSTR=`$TMATE -S /tmp/tmate.sock display -p '#{tmate_ssh}'| awk '{print $3}'`
 	if [ "$TMATECONSTR" != "$CONNSTR" ]; then
-		echo "`date` - The Connection String has been changed! New Address: $CONNSTR" | $SSH root@$TMTSLV "cat >> /var/log/tmate-control-SANJERRY-SRV1.log"
+		echo "`date` - The Connection String has been changed! New Address: $CONNSTR" | $SSH root@$TMTSLV "cat >> /var/log/tmate-control.log"
 		export TMATECONSTR="$CONNSTR"
 		#exit 1
 	else
-		echo "`date` - The Connection String stay the same." | $SSH root@$TMTSLV "cat >> /var/log/tmate-control-SANJERRY-SRV1.log"
+		echo "`date` - The Connection String stay the same." | $SSH root@$TMTSLV "cat >> /var/log/tmate-control.log"
 		#exit 0
 	fi
 }
